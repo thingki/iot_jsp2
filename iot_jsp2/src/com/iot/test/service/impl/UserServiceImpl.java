@@ -24,12 +24,12 @@ public class UserServiceImpl implements UserService {
 		UserClass uc = gs.fromJson(req.getParameter("param"), UserClass.class);
 		UserClass checkUc = ud.selectUser(uc.getUiId());
 		HashMap<String, Object> hm = new HashMap<String, Object>();
-		hm.put("msg", "로그인 성공");
+		hm.put("msg", "Welcome IOT_TEST HomePage");
 		hm.put("login", "ok");
 
 		if (checkUc != null) {
 			if (!checkUc.getUiPwd().equals(uc.getUiPwd())) {
-				hm.put("msg", "비번 확인요");
+				hm.put("msg", "Check UserPWD");
 				hm.put("login", "pwdno");
 			} else {
 				System.out.println(uc.isSaveId());
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 				hs.setAttribute("user", checkUc);			
 			}
 		} else {
-			hm.put("msg", "아이디 확인요!");
+			hm.put("msg", "Check UserID!");
 			hm.put("login", "idno");
 		}
 		return hm;
@@ -68,10 +68,10 @@ public class UserServiceImpl implements UserService {
 		int result = ud.insertUser(uc);
 		HashMap<String, String> rm = new HashMap<String, String>();
 		rm.put("result", "no");
-		rm.put("msg", "실패!!!!!!!!!!");
+		rm.put("msg", "Failed membership");
 		if(result ==1) {
 			rm.put("result", "ok");
-			rm.put("msg", "성공해에에에에따!!!!!!!!!");
+			rm.put("msg", "Membership Success!!");
 		}											
 		req.setAttribute("resStr", gs.toJson(rm));
 	}
@@ -89,10 +89,10 @@ public class UserServiceImpl implements UserService {
 		int result = ud.deleteUser(uc);
 		HashMap<String, String> rm = new HashMap<String, String>();
 		rm.put("result", "no");
-		rm.put("msg", "삭제가 실패!!!!!!!!!!");
+		rm.put("msg", "Failed to delete data");
 		if(result==1) {
 			rm.put("result", "ok");
-			rm.put("msg", "삭제가 성공!!!!!!!!");
+			rm.put("msg", "Successful data deletion");
 		}
 		return gs.toJson(rm);
 	}
@@ -104,10 +104,10 @@ public class UserServiceImpl implements UserService {
 		int result = ud.updateUser(uc);
 		Map<String, String> rm = new HashMap<String, String>();
 		rm.put("result", "no");
-		rm.put("msg", "수정이 실패!!!!!!!!!! why??");
+		rm.put("msg", "Data update failed");
 		if(result==1) {
 			rm.put("result", "ok");
-			rm.put("msg", "수정 성공!!!!!!!!");
+			rm.put("msg", "Data update successful!");
 		}
 		return gs.toJson(rm);
 	}
@@ -119,10 +119,10 @@ public class UserServiceImpl implements UserService {
 		int result = ud.myupdateUser(uc);
 		Map<String, String> rm = new HashMap<String, String>();
 		rm.put("result", "no");
-		rm.put("msg", "수정이 실패!!!!!!!!!! why??");
+		rm.put("msg", "Your Data update failed");
 		if(result==1) {
 			rm.put("result", "ok");
-			rm.put("msg", "수정 성공!!!!!!!!");
+			rm.put("msg", "Your Data update successful!");
 		}
 		return gs.toJson(rm);
 	}

@@ -18,40 +18,36 @@
 				<div class="col-sm-4">
 					<form>
 						<div class="input-group">
-							<span class="input-group-addon"><i
-								class="glyphicon glyphicon-user"></i></span> <input id="userId"
-								type="text" class="form-control" name="userId"
+							<span class="input-group-addon">
+							<i class="glyphicon glyphicon-user"></i></span> 
+							<input id="userId" type="text" class="form-control" name="userId"
 								placeholder="userId" style="width: 310px" autofocus>
 						</div>
 						<div class="input-group">
-							<span class="input-group-addon"><i
-								class="glyphicon glyphicon-lock"></i></span> <input id="userPwd"
-								type="password" class="form-control" name="userPwd"
+							<span class="input-group-addon">
+							<i class="glyphicon glyphicon-lock"></i></span>
+							<input id="userPwd" type="password" class="form-control" name="userPwd"
 								placeholder="userPwd" style="width: 310px">
 						</div>
 						<div class="input-group">
-							<div class="row">
-								<div class="col-sm-3"></div>
-								<div class="col-sm-6">
-									<label> <input id="saveId" type="checkbox" >Remember Me
-									</label>
-								</div>
-								<div class="col-sm-3"></div>	
-								</div>
-								<div class="input-group">
-									<input class="btn btn-lg btn-block" type="button" id="loginBtn" style="background:#a5a5a5; color:white; width: 350px"
-										value="Login" onclick="checkValue()">
-									<a href="/view/user/signin"><h5>회원가입</h5></a>
-								</div>
-								<p>
-									The test of our progress is not whether we add more to the
-									abundance of those who have much; <br> it is whether we
-									provide enough for those who have too little.<br> What
-									experience and history teach is this - that people and
-									government never have learned anything from history,<br>
-									or acted on principles deduced from it.<br>
+							<span class="input-group-addon text-center">
+									<label> <input id="saveId" type="checkbox">Remember Me </label>
+							</span></div>
 
-								</p>
+							<div class="input-group">
+								<input class="btn btn-lg btn-block" type="button" id="loginBtn"
+									style="background: #a5a5a5; color: white; width: 350px"
+									value="Login" onclick="checkValue()"> <a
+									href="/view/user/signin"><h5>Sign in</h5></a>
+							</div>
+							<p>
+								The test of our progress is not whether we add more to the
+								abundance of those who have much; <br> it is whether we
+								provide enough for those who have too little.<br> What
+								experience and history teach is this - that people and
+								government never have learned anything from history,<br> or
+								acted on principles deduced from it.<br>
+							</p>
 					</form>
 				</div>
 			</div>
@@ -73,17 +69,16 @@ function checkValue(){
 	var saveId = $("#saveId").val().trim();
 	
 	if(userId.length<3){
-		alert("유저아이디 확인해!!");
+		alert("Check UserID, More than 3 letters");
 		$("#userId").focus();
 		return;
 	}
 	if(userPwd.length<3){
-		alert("비밀번호 확인해!!");
+		alert("Check UserPWD, More than 3 letters");
 		$("#userPwd").focus();
 		return;
 	}
 	var param = {uiId:userId, uiPwd:userPwd, saveId:saveId};
-	
 	param = "param=" + encodeURIComponent(JSON.stringify(param));
 	$.ajax({
 		url : '<%=rootPath%>/user/login',
@@ -104,30 +99,30 @@ function checkValue(){
 			}
 		})
 	}
-	
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
 
-$(document).ready(function(){
-   var userId = getCookie("userId");
-   var saveId = getCookie("saveId");
-   if(userId){
-      $("#userId").val(userId);
-      $("#saveId").prop("checked",true);
-   }
-});	
+	function getCookie(cname) {
+		var name = cname + "=";
+		var decodedCookie = decodeURIComponent(document.cookie);
+		var ca = decodedCookie.split(';');
+		for (var i = 0; i < ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return "";
+	}
+
+	$(document).ready(function() {
+		var userId = getCookie("userId");
+		var saveId = getCookie("saveId");
+		if (userId) {
+			$("#userId").val(userId);
+			$("#saveId").prop("checked", true);
+		}
+	});
 </script>
 </html>

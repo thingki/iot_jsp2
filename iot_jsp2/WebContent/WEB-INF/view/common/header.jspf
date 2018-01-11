@@ -4,25 +4,26 @@
 
 
 <%
-String rootPath = request.getContextPath();
-UserClass user = (UserClass)session.getAttribute("user");
-String loginMenu = "Login";
-String loginUrl = rootPath + "/view/user/login";
-if(user!=null){
-	loginMenu = "Logout";
-	loginUrl = rootPath + "/user/logout";
-}
-String uri=request.getRequestURI();
-int idx=uri.lastIndexOf(".");
-if(idx!=-1){
-	uri=uri.substring(8, idx);
-}
+	String rootPath = request.getContextPath();
+	UserClass user = (UserClass) session.getAttribute("user");
+	String loginMenu = "Login";
+	String loginUrl = rootPath + "/view/user/login";
+	if (user != null) {
+		loginMenu = "Logout";
+		loginUrl = rootPath + "/user/logout";
+	}
+	String uri = request.getRequestURI();
+	int idx = uri.lastIndexOf(".");
+	if (idx != -1) {
+		uri = uri.substring(8, idx);
+	}
 %>
 <script>
 $(document).ready(function(){   
-	   $("li a[href='<%=uri%>']").parent().attr("class","active");
+	   $("li a[href='<%=uri%>']").parent().attr("class", "active");
 	})
 </script>
+
 <nav class="navbar navbar-default">
 	<div class="container">
 		<div class="navbar-header">
@@ -30,19 +31,28 @@ $(document).ready(function(){
 		</div>
 		<!-- Links -->
 		<ul class="nav navbar-nav">
-			<li class="nav-item"><a class="nav-link" href="<%=rootPath%>/"><em class="glyphicon glyphicon-home"></em>Home</a></li>
-			<li class="nav-item"><a class="nav-link" href="<%=loginUrl%>"><em class="glyphicon glyphicon-off"></em><%=loginMenu%></a></li>
-			<li class="nav-item"><a class="nav-link" href="<%=rootPath%>/view/user/list"><em class="glyphicon glyphicon-list-alt"></em>User List</a></li>
-			<li class="nav-item"><a class="nav-link" href="<%=rootPath%>/view/user/mypage"><em class="glyphicon glyphicon-user"></em>My Page</a></li>
+			<li class="nav-item"><a class="nav-link" href="<%=rootPath%>/"><em
+					class="glyphicon glyphicon-home"></em>Home</a></li>
+			<li class="nav-item"><a class="nav-link" href="<%=loginUrl%>"><em
+					class="glyphicon glyphicon-off"></em><%=loginMenu%></a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="<%=rootPath%>/view/user/list"><em
+					class="glyphicon glyphicon-list-alt"></em>User List</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="<%=rootPath%>/view/user/mypage"><em
+					class="glyphicon glyphicon-user"></em>My Page</a></li>
 			<!-- Dropdown -->
-			<li class="dropdown"><a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown"><em class="glyphicon glyphicon-th"></em>Class Info 
-			<span class="caret"></span></a>
-			<ul class="dropdown-menu">
-				<li><a href="<%=rootPath%>/view/class/classlist"><em class="glyphicon glyphicon-book"></em>Class List</a></li>
-				<li><a href="<%=rootPath%>/view/class/classinsert"><em class="glyphicon glyphicon-download-alt"></em>Class Insert</a></li>
-				<li><a href="#"><em class="glyphicon glyphicon-headphones"></em>Contect us</a></li>	
-			</ul>
-			</li>
-			</ul>
+			<li class="dropdown"><a class="dropdown-toggle" href="#"
+				id="navbardrop" data-toggle="dropdown"><em
+					class="glyphicon glyphicon-th"></em>Class Info <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="<%=rootPath%>/view/class/classlist"><em
+							class="glyphicon glyphicon-book"></em>Class List</a></li>
+					<li><a href="<%=rootPath%>/view/class/classinsert"><em
+							class="glyphicon glyphicon-download-alt"></em>Class Insert</a></li>
+					<li><a href="#"><em class="glyphicon glyphicon-headphones"></em>Contect
+							us</a></li>
+				</ul></li>
+		</ul>
 	</div>
 </nav>

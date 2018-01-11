@@ -11,13 +11,11 @@ table {
 	border-collapse: collapse;
 	width: 100%;
 }
-
 th, td {
 	padding: 8px;
 	text-align: center;
 	border-bottom: 2px solid #ddd;
 }
-
 tr:hover {
 	background-color: #f5f5f5;
 }
@@ -49,6 +47,7 @@ tr:hover {
 				</div>
 				<div class="panel-body">
 					<table id="grid1" data-key="uiNo" class="table table-hover">
+					
 						<thead>
 							<tr>
 								<th class="text-center" data-field="uiNo,ro">번호</th>
@@ -64,6 +63,7 @@ tr:hover {
 						<tbody id="result_tb" >
 						</tbody>
 					</table>
+
 				</div>
 			</div>
 		</div>
