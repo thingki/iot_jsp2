@@ -37,7 +37,7 @@ $(document).ready(function(){
 });
 </script>
 <body>
-	<jsp:include page="/WEB-INF/view/common/header.jsp" flush="false" />
+	<jsp:include page="/WEB-INF/view/common/header.jspf" flush="false" />
 <br>
 	<div class="container">
 	    <div class="row">

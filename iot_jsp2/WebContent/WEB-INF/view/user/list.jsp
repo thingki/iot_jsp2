@@ -1,106 +1,175 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>유저리스트</title>
-
- <!-- Bootstrap Core CSS -->
-    <link href="/ui/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- MetisMenu CSS -->
-    <link href="/ui/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-
-    <!-- DataTables CSS -->
-    <link href="/ui/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
-
-    <!-- DataTables Responsive CSS -->
-    <link href="/ui/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="/ui/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/ui/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+<title>User List</title>
 </head>
 <link rel="stylesheet" href="<%=rootPath%>/ui/css/list.css" />
+<style>
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	padding: 8px;
+	text-align: center;
+	border-bottom: 2px solid #ddd;
+}
+
+tr:hover {
+	background-color: #f5f5f5;
+}
+</style>
 <body>
-	<jsp:include page="/WEB-INF/view/common/header.jsp" flush="false" />
-<br>
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Tables</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            DataTables Advanced Tables
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                <thead>
-                                    <tr>
-                                        <th>번호</th>
-                                        <th>이름</th>
-                                        <th>나이</th>
-                                        <th>ID</th>
-                                        <th>가입일자</th>
-                                        <th>주소</th>
-                                        <th class="text-center"><em class="glyphicon glyphicon-asterisk"></em></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="result_tb">
-                                </tbody>
-                            </table>
-                            <!-- /.table-responsive -->
-                            <div class="well">
-                                <h4>DataTables Usage Information</h4>
-                                <p>DataTables is a very flexible, advanced tables plugin for jQuery. In SB Admin, we are using a specialized version of DataTables built for Bootstrap 3. We have also customized the table headings to use Font Awesome icons in place of images. For complete documentation on DataTables, visit their website at <a target="_blank" href="https://datatables.net/">https://datatables.net/</a>.</p>
-                                <a class="btn btn-default btn-lg btn-block" target="_blank" href="https://datatables.net/">View DataTables Documentation</a>
-                            </div>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
+	<jsp:include page="/WEB-INF/view/common/header.jspf" flush="false" />
+	<div class="col-sm-2"></div>
+	<div class="col-sm-8" style="color: white">
+		<h3>IOT_TEST All User List</h3>
+		<p>
+			Two cheers for democracy: one because it admit variety and two
+			because it permits criticism. <br> Two cheers are quite enough:
+			There is no occasion to give three.
+		</p>
+		<div class="col-md-10 col-md-offset-1">
+			<div class="panel panel-default panel-table">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col col-xs-6">
+							<h3 style="margin-top: 3px">User List</h3>
+						</div>
+						<div class="col col-xs-6 text-right">
+							<input type="text" class="input">
+							<button type="button" class="btn btn-sm btn-success">
+								<span class="glyphicon glyphicon-search"></span> Search
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="panel-body">
+					<table id="grid1" data-key="uiNo" class="table table-hover">
+						<thead>
+							<tr>
+								<th class="text-center" data-field="uiNo,ro">번호</th>
+								<th class="text-center" data-field="uiName,txt">이름</th>
+								<th class="text-center" data-field="uiAge,txt">나이</th>
+								<th class="text-center" data-field="uiId,txt">ID</th>
+								<th class="text-center" data-field="uiRegdate,ro">회원 가입 일자</th>
+								<th class="text-center" data-field="address,txt">주소</th>
+								<th class="text-center" data-field="BTN"><em
+									class="glyphicon glyphicon-wrench"></em></th>
+							</tr>
+						</thead>
+						<tbody id="result_tb" >
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-2"></div>
+	<div class="row">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-4" style='color:white'>
+			<p>
+			Better the last smile than the first laughter.Envy and wrath shorten the life. 
+			Faith is a higher faculty than reason.
+			 I never think of the future. It comes soon enough. Nature never deceives us; <br>
+			 it is always we who deceive ourselves.
+		</p>
+	</div>
+	<div class="col-sm-4"></div>
+	</div>
 </body>
-<script>
+<script> 
+function updateUser(uiNo){
+var isUpdate = confirm("수정하시겠소??");
+   var uiName = $("#uiName" + uiNo).val().trim();
+   var uiAge = $("#uiAge" + uiNo).val().trim();
+   var address = $("#address" + uiNo).val().trim();
+   var uiId = $("#uiId" + uiNo).val().trim();
+   var param = {uiNo:uiNo, uiName:uiName, uiAge:uiAge, address:address, uiId:uiId};
+   param = "param=" + JSON.stringify(param);
+   if(isUpdate){
+   $.ajax({
+      url : '/user/update',
+      type : 'post',
+      data : param,
+      dataType:"json",
+      success:function(res){
+         alert(res.msg);
+         if(res.result =="ok"){
+            location.reload();
+         }
+      },
+      error:function(xhr,status,error){ 
+      }
+   })
+   }
+}
+
+function deleteUser(uiNo){
+   var isDelete = confirm("진짜지우게?");
+   var param ="uiNo=" + uiNo;
+   if(isDelete){
+      $.ajax({
+         url : '/user/delete',
+         type : 'post',
+         data : param,
+         dataType:"json",
+         success:function(res){
+            alert(res.msg);
+            if(res.result =="ok"){
+               location.reload();
+            }
+         },
+         error:function(xhr,status,error){
+         }
+      })     
+   }
+}
+
+var colsInfo= [];      //Array()  요거야
 $(document).ready(function(){
-	$.ajax({
-		url : '/user/list',
-		type : 'get',
-		success:function(res){
-			var list = JSON.parse(res);
-			var str ="";
-			for(var uc of list){
-				str += "<tr class="odd gradeX">";
-				str += "<td class='text-center'>" + uc.uiNo + "</td>";
-				str += "<td class='text-center'>" + uc.uiName + "</td>";
-				str += "<td class='text-center'>" + uc.uiAge + "</td>";
-				str += "<td class='text-center'>" + uc.uiId + "</td>";
-				str += "<td class='text-center'>" + uc.uiRegdate + "</td>";
-				str += "<td class='text-center'>" + uc.address + "</td>";
-				str += '<td align="center">';
-				str += '<a class="btn btn-default"><em class="glyphicon glyphicon-refresh"></em></a>';
-				str += '<a class="btn btn-danger"><em class="glyphicon glyphicon-trash"></em></a>';
-				str += '</td>';
-			}
-			$("#result_tb").html(str);
-		},
-		error:function(xhr,status,error){
-			
-		}
-	});
-	
+   var colList = $("#grid1 th[data-field]"); // #는     id=grid1일때 th[data-field] 값을 가져온다 
+   for(var i=0; i<colList.length;i++){
+      colsInfo.push(colList[i].getAttribute("data-field"));   //colsInfo[colsInfo.length] 라고 예전에는 권고 사항으로 썻다
+   }
+   var keyCol = $("#grid1").attr("data-key");    //jquery 라서 attr 쓸수있는거다 
+   
+   $.ajax({
+      url : '/user/list',
+      type : 'get',
+      success:function(res){
+         var list = JSON.parse(res);
+         var str ="";
+         for(var uc of list){            
+            var key =uc[keyCol];
+            str +="<tr>";
+            for(var field of colsInfo){
+               str += "<td class='text-center'>";
+               if(field =="BTN"){
+                  str += '<a class="btn btn-default" onclick="updateUser(' +key+ ')"><em class="glyphicon glyphicon-scissors"></em></a>';      //버튼생성
+                  str += '<a class="btn btn-danger" onclick="deleteUser(' +key+ ')"><em class="glyphicon glyphicon-trash"></em></a>';      
+            }else{
+               var colName = field.split(",")[0];
+               var colType = field.split(",")[1];
+            if(colType=="ro"){
+               str += uc[colName];
+            }else{
+               str += "<input type ='text' id='" + colName + key + "' value='" + uc[colName]+ "' style='text-align:center; height: 25px; width: 130px;'>"; 
+            }       
+               }
+               str += "</td>";
+            }
+            str += "</tr>";
+         }
+         $("#result_tb").html(str);
+      },
+      error:function(xhr,status,error){
+      }
+   });  
 });
 </script>
 </html>

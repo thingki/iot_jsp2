@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.iot.test.common.DBCon;
 import com.iot.test.dao.UserDAO;
+import com.iot.test.utils.DBUtil;
 import com.iot.test.vo.UserClass;
 
 public class UserDAOImpl implements UserDAO{
@@ -19,7 +20,7 @@ public class UserDAOImpl implements UserDAO{
 		ResultSet rs = null;
 		try {
 			con = DBCon.getCon();
-			String sql = "select * from user_info ui, class_info ci where ui.cino=ci.cino";
+			String sql = "select *, date_format(uiregdate, '%Y-%m-%d') as rdate from user_info ui, class_info ci where ui.cino=ci.cino";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
@@ -33,11 +34,13 @@ public class UserDAOImpl implements UserDAO{
 				uc.setUiPwd(rs.getString("uipwd"));
 				uc.setUiName(rs.getString("uiname"));
 				uc.setUiNo(rs.getInt("uino"));
-				uc.setUiRegdate(rs.getString("uiregdate"));
+				uc.setUiRegdate(rs.getString("rdate"));
 				userList.add(uc);			
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			DBUtil.closeAll(rs, con, ps);;
 		}
 		return userList;
 	}
@@ -69,6 +72,8 @@ public class UserDAOImpl implements UserDAO{
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			DBUtil.closeAll(rs, con, ps);
 		}
 		return null;
 	}
@@ -93,19 +98,54 @@ public class UserDAOImpl implements UserDAO{
 				
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			DBUtil.close(con);
+			DBUtil.close(ps);
 		}
 		return 0;
 	}
 
 	@Override
 	public int updateUser(UserClass uc) {
-		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = DBCon.getCon();
+			String sql = "update user_info\r\n" + 
+					"set uiName=?, uiAge=?, address=?, uiid=? where uiNo=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, uc.getUiName());
+			ps.setInt(2, uc.getUiAge());
+			ps.setString(3, uc.getAddress());
+			ps.setString(4, uc.getUiId());
+			ps.setInt(5, uc.getUiNo());
+			return ps.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(con);
+			DBUtil.close(ps);
+		}
 		return 0;
 	}
 
 	@Override
 	public int deleteUser(UserClass uc) {
-		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = DBCon.getCon();
+			String sql = "delete from user_info where uiNo=?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, uc.getUiNo());
+			return ps.executeUpdate();
+				
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(con);
+			DBUtil.close(ps);
+		}
 		return 0;
 	}
 
@@ -115,4 +155,31 @@ public class UserDAOImpl implements UserDAO{
 		return null;
 	}
 
+	@Override
+	public int myupdateUser(UserClass uc) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = DBCon.getCon();
+			String sql = "update user_info\r\n" + 
+					"set uiName=?, uiAge=?, uiId=?, uiPwd=?, ciNo=?, address=? where uiNo=?;";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, uc.getUiName());
+			
+			ps.setInt(2, uc.getUiAge());
+			ps.setString(3, uc.getUiId());
+			ps.setString(4, uc.getUiPwd());
+			ps.setInt(5, uc.getCiNo());
+			ps.setString(6, uc.getAddress());	
+			ps.setInt(7, uc.getUiNo());	
+			System.out.println(ps);
+			return ps.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(con);
+			DBUtil.close(ps);
+		}
+		return 0;
+	}
 }

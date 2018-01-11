@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.iot.test.common.DBCon;
 import com.iot.test.dao.ClassDAO;
+import com.iot.test.utils.DBUtil;
 import com.iot.test.vo.ClassInfo;
 import com.iot.test.vo.UserClass;
 
@@ -35,8 +36,73 @@ public class ClassDAOImpl implements ClassDAO {
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			DBUtil.closeAll(rs, con, ps);;
 		}
 		return classList;
 	}
 
+	@Override
+	public int insertClass(ClassInfo ci) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = DBCon.getCon();
+			String sql = "insert into class_info(ciname, cidesc)\r\n" + 
+							"values(?,?)";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, ci.getCiName());
+			ps.setString(2, ci.getCiDesc());
+			return ps.executeUpdate();			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(con);
+			DBUtil.close(ps);
+		}
+		return 0;
+	}
+
+	@Override
+	public int updateClass(ClassInfo ci) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = DBCon.getCon();
+			String sql = "update class_info\r\n" + 
+					"set ciName=?, ciDesc=? where ciNo=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, ci.getCiName());
+			ps.setString(2, ci.getCiDesc());
+			ps.setInt(3, ci.getCiNo());
+			return ps.executeUpdate();
+				
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(con);
+			DBUtil.close(ps);
+		}
+		return 0;
+	}
+
+	@Override
+	public int deleteClass(ClassInfo ci) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = DBCon.getCon();
+			String sql = "delete from class_info where ciNo=?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, ci.getCiNo());
+			return ps.executeUpdate();
+				
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(con);
+			DBUtil.close(ps);
+		}
+		return 0;
+	}
 }

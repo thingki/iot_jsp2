@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -7,13 +7,19 @@
 </head>
 <link rel="stylesheet" href="<%=rootPath%>/ui/css/sign.css" />
 <body>
-	<jsp:include page="/WEB-INF/view/common/header.jsp" flush="false" />
-
-	<div class="container">
-		<div class="starter-template">
-
-			<form class="form-signin">
-				<table class="table">
+	<jsp:include page="/WEB-INF/view/common/header.jspf" flush="false" />
+	<div class="row">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4">
+			<h2>Sign In</h2>
+			<p>
+				The mystery of language was revealed to me.<br> I knew then
+				that "w-a-t-e-r" meant the wonderful cool something that was flowing
+				over my hand.<br> That living word awakened my soul, gave it
+				light, joy, set it free!<br>
+			</p>
+			<table class="table table-hover">
+				<thead>
 					<tr>
 						<th>이름</th>
 						<td><input type="text" id="uiName" name="uiName"
@@ -36,10 +42,8 @@
 					</tr>
 					<tr>
 						<th>반</th>
-						<td>
-							<select name="ciNo" id="ciNo" class="form-control">
-							</select>
-						</td>
+						<td><select name="ciNo" id="ciNo" class="form-control">
+						</select></td>
 					</tr>
 					<tr>
 						<th>주소</th>
@@ -47,16 +51,18 @@
 							class="form-control" placeholder="주소"></td>
 					</tr>
 					<tr>
-						<td colspan="2"> 
-							<input class="btn btn-lg btn-primary btn-block" type="button"
-								id="singnBtn" value="Signin" onclick="signin()">
+						<td colspan="2"><input class="btn btn-lg btn-block"
+							type="button" id="singnBtn" value="Signin" onclick="signin()">
 						</td>
 					</tr>
-				</table>
-			</form>
+				</thead>
+			</table>
+
 		</div>
 	</div>
+	<div class="col-sm-4"></div>
 </body>
+
 <script>
 function signin(){
 	//"uiName,uiAge,uiId,uiPwd,ciNo,address"
@@ -86,12 +92,12 @@ function signin(){
 }
 $(document).ready(function(){
 	$.ajax({
-		url : '/class/list',
+		url : '/class/classlist',
 		type : 'get',
 		success:function(res){
 			var list = JSON.parse(res);
-			var str = "";
-			for(var ci of list){
+			var str = "<option value=0>선택사항</option>";
+			for(var ci of list){ 
 				str += "<option value='" + ci.ciNo + "'>" + ci.ciName +"</option>";
 			}
 			//document.getElementById("ciNo").insertAdjacentHTML("beforeend",str);
@@ -101,7 +107,6 @@ $(document).ready(function(){
 			
 		}
 	});
-	
 });
 </script>
 </html>

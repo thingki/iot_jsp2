@@ -12,6 +12,17 @@ public class UserClass {
 	private int uiAge;
 	private String uiRegdate;
 	private String address;
+	private boolean saveId;
+	
+	
+	
+
+	public boolean isSaveId() {
+		return saveId;
+	}
+	public void setSaveId(boolean saveId) {
+		this.saveId = saveId;
+	}
 	
 	public int getCiNo() {
 		return ciNo;
@@ -78,7 +89,7 @@ public class UserClass {
 	public String toString() {
 		return "UserClass [ciNo=" + ciNo + ", ciName=" + ciName + ", ciDesc=" + ciDesc + ", uiNo=" + uiNo + ", uiName="
 				+ uiName + ", uiId=" + uiId + ", uiPwd=" + uiPwd + ", uiAge=" + uiAge + ", uiRegdate=" + uiRegdate
-				+ ", address=" + address + "]";
+				+ ", address=" + address + ", saveId=" + saveId + "]";
 	}
-	
+
 }

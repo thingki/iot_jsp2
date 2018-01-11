@@ -19,7 +19,6 @@ public class ClassServlet extends HttpServlet {
 	Gson gs = new Gson();
 	
 	public String getCommand(String uri) {
-
 		int idx = uri.lastIndexOf("/");
 		if (idx != -1) {
 			return uri.substring(idx+1);
@@ -38,16 +37,21 @@ public class ClassServlet extends HttpServlet {
 	}
 
 	public void doProcess(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		   req.setCharacterEncoding("utf-8");
-		      res.setCharacterEncoding("utf-8");
-		      res.setContentType("text/html;charset=utf-8");
-		      PrintWriter out = res.getWriter();
-		      String uri = req.getRequestURI();
-		      String cmd = getCommand(uri);
-		      if (cmd.equals("list")) {
-		         List<ClassInfo> classList = cs.getClassList();
-		         out.println(gs.toJson(classList));
-		      }
+		
+		PrintWriter out = res.getWriter();
+		String uri = req.getRequestURI();
+		String cmd = getCommand(uri);
+		if (cmd.equals("classlist")) {
+			List<ClassInfo> classList = cs.getClassList();
+			out.println(gs.toJson(classList));
+		} else if (cmd.equals("deleteclass")) {
+			out.println(cs.deleteClass(req));
+		} else if (cmd.equals("updateclass")) {
+			out.println(cs.updateClass(req));
+		} else if (cmd.equals("classinsert")) {
+			cs.insertClass(req);
+			out.println(req.getAttribute("resStr"));
+		}
 	}
 }
 

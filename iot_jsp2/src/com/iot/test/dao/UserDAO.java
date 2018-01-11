@@ -11,5 +11,6 @@ public interface UserDAO {
 	int insertUser(UserClass uc);
 	int updateUser(UserClass uc);
 	int deleteUser(UserClass uc);
+	int myupdateUser(UserClass uc);
 
 }
