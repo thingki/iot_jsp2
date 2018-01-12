@@ -21,7 +21,7 @@ if(user==null){
 <body>
 	<jsp:include page="/WEB-INF/view/common/header.jspf" flush="false" />
     <div class="container">
-      <div class="jumbotron starter-template"  style="color:black">
+      <div class="starter-template"  style="color:#efe4e4">
       
       
       
@@ -43,26 +43,20 @@ if(user==null){
 		</h4>
 		<p>
 
-
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-4"></div>
-					<div class="col-sm-4">
-					<div class="row">
-					<div class="col-sm-4">
-					<span><img src=/ui/img/kakao.png width="35" height="35" class='img-circle' alt='Cinque Terre' style='filter:grayscale(100%)'></span></div>
-					<div class="col-sm-4">
-					<span><img src=/ui/img/Facebook.png width="35" height="35" class='img-circle' alt='Cinque Terre' style='filter:grayscale(100%)'></span></div>
-					<div class="col-sm-4">
-					<span><img src=/ui/img/twitter.png width="35" height="35" class='img-circle' alt='Cinque Terre' style='filter:grayscale(100%)'></span></div>
-					</div>
-					<div class="col-sm-4"></div>
-				</div>
-			</div>
-
 		</div>
     </div><!-- /.container -->
-
+<footer class="container-fluid text-center" style='color:#efe4e4'>
+<address>
+   <strong>Written by HyungSoo Kim</strong><br> 
+    Example.com<br>
+    Box 564, Disneyland<br>
+    USA<br>
+  </address>
+  
+  <span><img src=/ui/img/kakao.png width="35" height="35" class='img-circle' alt='Cinque Terre' style='filter:grayscale(100%)'></span>
+  <span><img src=/ui/img/Facebook.png width="35" height="35" class='img-circle' alt='Cinque Terre' style='filter:grayscale(100%)'></span>
+  <span><img src=/ui/img/twitter.png width="35" height="35" class='img-circle' alt='Cinque Terre' style='filter:grayscale(100%)'></span>
+</footer>
 </body>
 </html>
 

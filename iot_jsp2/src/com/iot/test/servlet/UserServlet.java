@@ -55,8 +55,12 @@ public class UserServlet extends HttpServlet {
 			us.signin(req);
 			out.println(req.getAttribute("resStr"));
 		} else if (cmd.equals("list")) {
-			ArrayList<UserClass> userList = us.getUserList();
-			out.println(gs.toJson(userList));
+			//ArrayList<UserClass> userList = us.getUserList();
+			//out.println(gs.toJson(userList));
+			UserService us = new UserServiceImpl();
+			us.getUserList(req);	
+	    	RequestDispatcher rd = req.getRequestDispatcher(uri);   
+	    	rd.forward(req, res);
 		} else if(cmd.equals("delete")) {
 			out.println(us.deleteUser(req));
 		}else if(cmd.equals("update")) {

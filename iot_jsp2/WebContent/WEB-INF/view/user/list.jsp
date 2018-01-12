@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -29,6 +30,16 @@ tr:hover {
 			Two cheers for democracy: one because it admit variety and two
 			because it permits criticism. <br> Two cheers are quite enough:
 			There is no occasion to give three.
+					<c:forEach items="${userList}" var="user">
+			<tr>
+				<th>유저번호 :</th>
+				<td>${user.uiNo}</td>
+				<th>유저이름 :</th>
+				<td>${user.uiName}</td>
+				<th>유저나이 :</th>
+				<td>${user.uiAge}</td>
+			</tr>
+		</c:forEach>
 		</p>
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default panel-table">
@@ -61,6 +72,32 @@ tr:hover {
 							</tr>
 						</thead>
 						<tbody id="result_tb" >
+							<c:forEach items="${userList}" var="user">
+							<tr>
+							<td class='text-center'>
+							<input type ='text' id='${user.uiNo}' value="${user.uiNo}" style='text-align:center; height: 25px; width: 130px;'>
+							</td>
+							<td>
+							<input type ='text' id='${user.uiName}' value='${user.uiName}' style='text-align:center; height: 25px; width: 130px;'>
+							</td>
+							<td class='text-center'>
+							<input type ='text' id='${user.uiAge}' value='${user.uiAge}' style='text-align:center; height: 25px; width: 130px;'>
+							</td>
+							<td class='text-center'>
+							<input type ='text' id='${user.uiId}' value='${user.uiId}' style='text-align:center; height: 25px; width: 130px;'>
+							</td>
+							<td class='text-center'>
+							<input type ='text' id='${user.uiRegdate}' value='${user.uiRegdate}' style='text-align:center; height: 25px; width: 130px;'>
+							</td>
+							<td class='text-center'>
+							<input type ='text' id='${user.uiaddress}' value='${user.uiaddress}' style='text-align:center; height: 25px; width: 130px;'>
+							</td>
+							<td class='text-center'>
+							<a class="btn btn-default" onclick="updateUser(' +key+ ')"><em class="glyphicon glyphicon-scissors"></em></a>
+							<a class="btn btn-danger" onclick="deleteUser(' +key+ ')"><em class="glyphicon glyphicon-trash"></em></a>
+							</td>
+							</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 
@@ -84,7 +121,7 @@ tr:hover {
 </body>
 <script> 
 function updateUser(uiNo){
-var isUpdate = confirm("수정하시겠소??");
+var isUpdate = confirm("Update??");
    var uiName = $("#uiName" + uiNo).val().trim();
    var uiAge = $("#uiAge" + uiNo).val().trim();
    var address = $("#address" + uiNo).val().trim();
@@ -110,7 +147,7 @@ var isUpdate = confirm("수정하시겠소??");
 }
 
 function deleteUser(uiNo){
-   var isDelete = confirm("진짜지우게?");
+   var isDelete = confirm("Really? Delete??");
    var param ="uiNo=" + uiNo;
    if(isDelete){
       $.ajax({
@@ -130,6 +167,7 @@ function deleteUser(uiNo){
    }
 }
 
+/*
 var colsInfo= [];      //Array()  요거야
 $(document).ready(function(){
    var colList = $("#grid1 th[data-field]"); // #는     id=grid1일때 th[data-field] 값을 가져온다 
@@ -171,5 +209,6 @@ $(document).ready(function(){
       }
    });  
 });
+*/
 </script>
 </html>

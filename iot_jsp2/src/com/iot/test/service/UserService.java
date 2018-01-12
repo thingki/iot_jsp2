@@ -11,7 +11,7 @@ import com.iot.test.vo.UserClass;
 public interface UserService {
 	
 	public HashMap<String, Object> login(HttpServletRequest req, HttpServletResponse res);
-	public ArrayList<UserClass> getUserList();
+	public void getUserList(HttpServletRequest req);
 	public void logout(HttpServletRequest req);
 	public void signin(HttpServletRequest req);
 	public String deleteUser(HttpServletRequest req);

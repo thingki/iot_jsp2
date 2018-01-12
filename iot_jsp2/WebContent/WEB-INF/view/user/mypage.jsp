@@ -87,7 +87,7 @@ if(user.getUiName().equals("SinkySang")){
 </body>
 <script>
 function myUpdate(uiNo){
-	var isUpdate = confirm("수정하시겠소??");
+	var isUpdate = confirm("Do you want Update??");
 	var uiName = $("#uiName").val().trim();
 	var uiAge = $("#uiAge").val().trim();
 	var uiId = $("#uiId").val().trim();
@@ -106,8 +106,7 @@ function myUpdate(uiNo){
 	      dataType:"json",
 	      success:function(res){
 	         alert(res.msg);
-	         if(res.result =="ok"){
-	            
+	         if(res.result =="ok"){            
 	         }
 	      },
 	      error:function(xhr,status,error){ 
@@ -133,6 +132,8 @@ $(document).ready(function(){
 		}
 	});
 });
+
+
 
 </script>
 </html>

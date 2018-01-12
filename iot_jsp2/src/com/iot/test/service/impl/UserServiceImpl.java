@@ -2,6 +2,7 @@ package com.iot.test.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -65,6 +66,8 @@ public class UserServiceImpl implements UserService {
 	public void signin(HttpServletRequest req) {
 		String json = req.getParameter("param");
 		UserClass uc = gs.fromJson(json, UserClass.class);
+		
+		
 		int result = ud.insertUser(uc);
 		HashMap<String, String> rm = new HashMap<String, String>();
 		rm.put("result", "no");
@@ -77,8 +80,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public ArrayList<UserClass> getUserList() {
-		return ud.selectUserList();
+	public void getUserList(HttpServletRequest req) {
+		List<UserClass> userList = ud.selectUserList();
+		req.setAttribute("userList", userList);
 	}
 
 	@Override
