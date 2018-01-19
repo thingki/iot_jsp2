@@ -66,7 +66,7 @@
 function checkValue(){
 	var userId = $("#userId").val().trim();
 	var userPwd = $("#userPwd").val().trim();
-	var saveId = $("#saveId").val().trim();
+	var saveId = $("#saveId").prop("checked");
 	
 	if(userId.length<3){
 		alert("Check UserID, More than 3 letters");

@@ -55,6 +55,7 @@ public class UserServlet extends HttpServlet {
 			us.signin(req);
 			out.println(req.getAttribute("resStr"));
 		} else if (cmd.equals("list")) {
+			
 			//ArrayList<UserClass> userList = us.getUserList();
 			//out.println(gs.toJson(userList));
 			UserService us = new UserServiceImpl();

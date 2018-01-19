@@ -20,7 +20,7 @@ public class UserDAOImpl implements UserDAO{
 		ResultSet rs = null;
 		try {
 			con = DBCon.getCon();
-			String sql = "select *, date_format(uiregdate, '%Y-%m-%d') as rdate from user_info ui, class_info ci where ui.cino=ci.cino";
+			String sql = "select *, date_format(uiregdate, '%Y-%m-%d') as uiregdate from user_info ui, class_info ci where ui.cino=ci.cino";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
@@ -34,7 +34,7 @@ public class UserDAOImpl implements UserDAO{
 				uc.setUiPwd(rs.getString("uipwd"));
 				uc.setUiName(rs.getString("uiname"));
 				uc.setUiNo(rs.getInt("uino"));
-				uc.setUiRegdate(rs.getString("rdate"));
+				uc.setUiRegdate(rs.getString("uiregdate"));
 				userList.add(uc);			
 			}
 		}catch(Exception e) {

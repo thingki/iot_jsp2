@@ -29,17 +29,7 @@ tr:hover {
 		<p>
 			Two cheers for democracy: one because it admit variety and two
 			because it permits criticism. <br> Two cheers are quite enough:
-			There is no occasion to give three.
-					<c:forEach items="${userList}" var="user">
-			<tr>
-				<th>유저번호 :</th>
-				<td>${user.uiNo}</td>
-				<th>유저이름 :</th>
-				<td>${user.uiName}</td>
-				<th>유저나이 :</th>
-				<td>${user.uiAge}</td>
-			</tr>
-		</c:forEach>
+			There is no occasion to give three.	
 		</p>
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default panel-table">
@@ -90,7 +80,7 @@ tr:hover {
 							<input type ='text' id='${user.uiRegdate}' value='${user.uiRegdate}' style='text-align:center; height: 25px; width: 130px;'>
 							</td>
 							<td class='text-center'>
-							<input type ='text' id='${user.uiaddress}' value='${user.uiaddress}' style='text-align:center; height: 25px; width: 130px;'>
+							<input type ='text' id='${user.address}' value='${user.address}' style='text-align:center; height: 25px; width: 130px;'>
 							</td>
 							<td class='text-center'>
 							<a class="btn btn-default" onclick="updateUser(' +key+ ')"><em class="glyphicon glyphicon-scissors"></em></a>
