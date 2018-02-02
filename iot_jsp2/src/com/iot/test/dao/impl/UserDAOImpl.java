@@ -139,8 +139,7 @@ public class UserDAOImpl implements UserDAO{
 			String sql = "delete from user_info where uiNo=?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, uc.getUiNo());
-			return ps.executeUpdate();
-				
+			return ps.executeUpdate();		
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
